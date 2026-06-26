@@ -1,0 +1,21 @@
+# Stata
+*.log
+*.smcl
+*.gph
+*.tmp
+*.bak
+
+# Betriebssystem
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+
+# Python
+__pycache__/
+
+# Output (optional)
+output/logs/*
+output/models/*
