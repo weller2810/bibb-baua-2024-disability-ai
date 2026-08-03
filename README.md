@@ -1,11 +1,8 @@
 README
-
 Projekt
-
 Titel
 
-Diversität, Digitalisierung und Disparitäten – Berufliche Weiterbildung,
-Behinderung und KI-Nutzung
+Diversität, Digitalisierung und Disparitäten – Berufliche Weiterbildung, Behinderung und KI-Nutzung
 
 Datengrundlage
 
@@ -17,130 +14,149 @@ Sabrina Weller (BIBB)
 
 Erstellt
 
-26.06.2026
-
-------------------------------------------------------------------------
+03.08.2026
 
 Forschungsfrage
 
-Ziel des Projekts ist die Untersuchung des Zusammenhangs zwischen
-beruflicher Weiterbildung, amtlich anerkannter Behinderung,
-Schwerbehinderung sowie der Nutzung von KI-Technologien.
+Ziel des Projekts ist die Untersuchung der Zusammenhänge zwischen beruflicher Weiterbildung, amtlich anerkannter Behinderung und der beruflichen Nutzung von KI-Technologien.
 
 Im Mittelpunkt steht die Forschungsfrage:
 
-  Haben Beschäftigte mit Behinderung geringere Chancen auf berufliche
-  Weiterbildung und welche Rolle spielt dabei die Nutzung von
-  KI-Technologien?
-
-------------------------------------------------------------------------
+Unterscheidet sich der Zusammenhang zwischen der beruflichen Nutzung von KI-Technologien und der Teilnahme an beruflicher Weiterbildung zwischen Erwerbstätigen mit und ohne amtlich anerkannte Behinderung?
 
 Projektstruktur
-
-Projekt │ ├── 1-Daten │ ├── BIBBBAuA_2024_SUF.dta │ └──
-etb2024_analyse_ki_weiterbildung_behinderung.dta │ ├── 2-Do-Files │ ├──
-01_variablenaufbereitung.do │ ├── 02_deskriptive_tabellen.do │ └──
-03_regressionsmodelle.do │ └── 3-Output ├── Logs ├── Tabellen ├──
-Abbildungen └── Regressionsmodelle
-
-------------------------------------------------------------------------
-
+Projekt
+│
+├── 1-Daten
+│   ├── BIBBBAuA_2024_SUF.dta
+│   └── etb2024_analyse_final.dta
+│
+├── 2-Do-Files
+│   ├── 00_master.do
+│   ├── 01_variablenaufbereitung.do
+│   ├── 02_deskriptive_analysen.do
+│   ├── 03_multivariate_modelle.do
+│   ├── 04_Berechnung_Complete_Case.do
+│   └── 06_Robustness_check.do
+│
+└── 3-Output
+    ├── Logs
+    ├── Tabellen
+    ├── Abbildungen
+    └── Modellschätzungen
 Reihenfolge der Analysen
-
-1.  01_variablenaufbereitung.do
-    -   Erstellung des Analysedatensatzes und aller Analysevariablen.
-2.  02_deskriptive_tabellen.do
-    -   Erstellung der deskriptiven Tabellen, Kreuztabellen und
-        Chi²-Tests.
-3.  03_regressionsmodelle.do
-    -   Schätzung der logistischen Regressionsmodelle und
-        Zusatzanalysen.
-
-------------------------------------------------------------------------
-
+00_master.do
+Führt sämtliche Analyseschritte in der vorgesehenen Reihenfolge aus.
+01_variablenaufbereitung.do
+Erstellung des Analysedatensatzes und aller Analysevariablen.
+02_deskriptive_analysen.do
+Erstellung der deskriptiven Tabellen, Kreuztabellen und Chi²-Tests.
+03_multivariate_modelle.do
+Schätzung der logistischen Regressionsmodelle, Average Marginal Effects (AME), Interaktionsanalysen und vorhergesagten Wahrscheinlichkeiten.
+04_Berechnung_Complete_Case.do
+Dokumentation der Analysestichprobe und der Ausschlüsse aufgrund fehlender Werte.
+06_Robustness_check.do
+Robustheitsanalysen unter Verwendung einer anerkannten Schwerbehinderung (Grad der Behinderung ≥ 50) als alternativer Operationalisierung des Behinderungsstatus.
 Beschreibung der Do-Files
+00_master.do
+
+Steuert den gesamten Analyseworkflow und führt alle Do-Files automatisch in der vorgesehenen Reihenfolge aus.
 
 01_variablenaufbereitung.do
 
-Dieses Do-File: - liest den Scientific Use File ein, - bereitet alle
-Analysevariablen auf, - recodiert Sonderwerte, - erstellt den
-Analysedatensatz, - speichert den Datensatz für die weiteren Analysen.
+Dieses Do-File:
 
-Ausgabe: - etb2024_analyse_ki_weiterbildung_behinderung.dta
+liest den Scientific Use File ein,
+bereitet alle Analysevariablen auf,
+rekodiert Sonderwerte,
+erstellt den Analysedatensatz,
+speichert den Datensatz für die weiteren Analysen.
 
-02_deskriptive_tabellen.do
+Ausgabe:
 
-Dieses Do-File erstellt: - Häufigkeitsverteilungen, - Kreuztabellen, -
-Pearson-χ²-Tests, - Cramérs V, - Tabellen für die Ergebnisdarstellung.
+etb2024_analyse_final.dta
+02_deskriptive_analysen.do
 
-03_regressionsmodelle.do
+Dieses Do-File erstellt:
+
+deskriptive Statistiken,
+Kreuztabellen,
+Pearson-χ²-Tests,
+Tabellen und Abbildungen für die Ergebnisdarstellung.
+03_multivariate_modelle.do
 
 Dieses Do-File schätzt die logistischen Regressionsmodelle.
 
-Hypothesen: - H1: Beschäftigte mit Behinderung nehmen seltener an
-beruflicher Weiterbildung teil. - H2: Beschäftigte mit Behinderung
-nutzen seltener KI-Technologien. - H3: KI-Nutzung erhöht die
-Wahrscheinlichkeit beruflicher Weiterbildung. - H4: Der Zusammenhang
-zwischen KI-Nutzung und Weiterbildung unterscheidet sich zwischen
-Beschäftigten mit und ohne Behinderung. - H5: Beschäftigte, die KI erst
-seit Kurzem nutzen, nehmen häufiger an beruflicher Weiterbildung teil.
+Hypothesen
 
-Zusatzanalysen: - KI-Intensität statt KI-Nutzung (ja/nein) -
-Schwerbehinderung statt amtlich anerkannter Behinderung
+H1: Erwerbstätige mit amtlich anerkannter Behinderung weisen eine geringere Wahrscheinlichkeit der Teilnahme an beruflicher Weiterbildung auf als Erwerbstätige ohne amtlich anerkannte Behinderung.
 
-------------------------------------------------------------------------
+H2: Erwerbstätige mit amtlich anerkannter Behinderung weisen eine geringere Wahrscheinlichkeit der beruflichen Nutzung von KI-Technologien auf als Erwerbstätige ohne amtlich anerkannte Behinderung.
+
+H3: Der Zusammenhang zwischen der beruflichen Nutzung von KI-Technologien und der Teilnahme an beruflicher Weiterbildung unterscheidet sich zwischen Erwerbstätigen mit und ohne amtlich anerkannte Behinderung.
+
+Die Ergebnisse werden als Average Marginal Effects (AME) berichtet.
+
+04_Berechnung_Complete_Case.do
+
+Dieses Do-File dokumentiert den Ausschluss fehlender Werte und die Bildung der endgültigen Analysestichprobe.
+
+06_Robustness_check.do
+
+Dieses Do-File wiederholt sämtliche Regressionsmodelle unter Verwendung einer anerkannten Schwerbehinderung (Grad der Behinderung ≥ 50) als alternativer Operationalisierung des Behinderungsstatus.
 
 Analysevariablen
-
-Abhängige Variablen: - Teilnahme an beruflicher Weiterbildung - Nutzung
-von KI-Technologien
-
-Zentrale unabhängige Variablen: - Amtlich anerkannte Behinderung -
-Schwerbehinderung - KI-Nutzung - KI-Nutzungsintensität - Erstmalige
-KI-Nutzung
-
-Kontrollvariablen: - Geschlecht - Alter - Schulabschluss -
-Berufsabschluss - Anforderungsniveau - Betriebsgröße - Branche -
-Führungsverantwortung - Computerarbeit - Digitale Arbeitsbedingungen
-
-------------------------------------------------------------------------
-
+Abhängige Variablen
+Teilnahme an beruflicher Weiterbildung
+Berufliche Nutzung von KI-Technologien
+Zentrale unabhängige Variablen
+Amtlich anerkannte Behinderung
+Berufliche KI-Nutzung
+Interaktion: Behinderung × KI-Nutzung
+Kontrollvariablen
+Geschlecht
+Alter
+Allgemeiner Schulabschluss
+Beruflicher Abschluss
+Betriebsgröße
+Wirtschaftsbereich
+Führungsverantwortung
+Häufige Computernutzung
+Nutzung spezieller Computerprogramme
 Statistische Verfahren
+Deskriptive Analysen
+Kreuztabellen
+Pearson-χ²-Test
+Binäre logistische Regression
+Interaktionseffekte
+Average Marginal Effects (AME)
+Vorhergesagte Wahrscheinlichkeiten (margins)
+Marginsplots
 
--   Deskriptive Analysen
--   Kreuztabellen
--   Pearson-χ²-Test
--   Cramérs V
--   Binäre logistische Regression
--   Interaktionseffekte
--   Marginale Effekte (margins)
--   Vorhergesagte Wahrscheinlichkeiten (marginsplot)
-
-Die Regressionsmodelle werden als Odds Ratios (OR) berichtet.
-
-------------------------------------------------------------------------
+Die Ergebnisse der Regressionsmodelle werden als Average Marginal Effects (AME) berichtet.
 
 Output
 
-Die Analysen erzeugen: - Log-Dateien - Deskriptive Tabellen -
-Regressionsmodelle - Marginal-Effects-Schätzungen - Abbildungen der
-vorhergesagten Wahrscheinlichkeiten
+Die Analysen erzeugen:
 
-Alle Ergebnisse werden im Ordner “3-Output” gespeichert.
+Log-Dateien
+Deskriptive Tabellen
+Regressionsmodelle
+Average Marginal Effects (AME)
+Vorhergesagte Wahrscheinlichkeiten
+Marginsplots
+Robustheitsanalysen
 
-------------------------------------------------------------------------
+Alle Ergebnisse werden im Ordner 3-Output gespeichert.
 
 Software
-
--   Stata 18
-
-------------------------------------------------------------------------
-
+Stata 18
 Reproduzierbarkeit
 
 Die Analysen sind vollständig reproduzierbar.
 
-Voraussetzungen: - Originaldatensatz der
-BIBB/BAuA-Erwerbstätigenbefragung 2024 - Unveränderte
-Projektordnerstruktur - Ausführung der Do-Files in der Reihenfolge: 01 →
-02 → 03
+Voraussetzungen
+
+Originaldatensatz der BIBB/BAuA-Erwerbstätigenbefragung 2024
+Unveränderte Projektordnerstruktur
+Ausführung des Master-Do-Files (00_master.do) oder alternativ der einzelnen Do-Files in der vorgesehenen Reihenfolge.
